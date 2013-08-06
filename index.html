@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Random User Generator</title>
+		<meta charset='utf-8'> 
+		<link rel="stylesheet" type="text/css" href="css/base.css">
+
+		<script type="text/javascript" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+	</head>
+	<body>
+			
+	<div class="banner">
+		<h1>Random User Generator</h1>
+		<div class="preview">
+			<div class="avatar">
+				<img id="avatar" alt="My Avatar" />
+			</div>
+			<div class="info">
+				<h3>Hi, my name is <span class="gen_first_name">John</span> <span class="gen_last_name">Smith</span><img id="refresh" class="refresh" src="img/refresh.png" width="18px"></h3>
+				<p>I am a randomly generated user. Want to use me as a placeholder in your web application? <a id="toggle" href="javascript: void(0);">Info</a></p>
+				<!-- <input  type="text" style="margin-top: 20px;" value="http://RandomUser/"></input> -->
+
+				<div id="hidden">
+					<p>
+					Name: <span class="gen_first_name">John</span> <span class="gen_last_name">Smith</span><br />
+					Gender: <span class="gen_gender">Male</span><br />
+					Email: <span class="gen_email_address">johnsmith27@gmail.com</span><br />
+					Profile Photo URL: <span class="gen_profile_url">URL</span>
+					</p>
+					<p>Date of Birth, Home Address, and more coming soon...</p>
+				</div>
+
+				<pre id="gen_url">http://RandomUser/</pre>
+			</div>
+		</div>
+	</div>
+
+	<div class="body frame">
+		<h2>What is RandomUser?</h2>
+		<p>RandomUser is an API that provides you with a randomly generated user. These users can be used as placeholders in web mockups, and will save you time from creating your own placeholder information.</p>
+
+		<h2>How to use</h2>
+		<p>You can use AJAX or another method to ask RandomUser for a randomly generated user. If you are using JQuery, you can paste this code in your body to get started.</p>
+<pre>
+$.ajax({
+  url: <span>'http://randomuser.me/g/'</span>,
+  dataType: <span>'json'</span>,
+  success: function(<span>results</span>){
+    console.log(<span>results</span>);
+  }
+});
+</pre>
+
+		<h2>Results</h2>
+		<p>The application will provide you with a JSON object that you can parse and apply to your application. </p>
+<pre>
+{
+  user: {
+    gender: <span class='gen_gender'>'female'</span>,
+    name: {
+      first: <span class='gen_first_name'>'courney'</span>,
+      last: <span class='gen_last_name'>'brown'</span>
+    },
+    email: <span class='gen_email_address'>'courtneybrown42@gmail.com'</span>,
+    picture: <span class='gen_profile_url'>'http://randomuser.me/g/photos/001.jpg'</span>,
+    seed: <span class='gen_seed'>'64945732045715498'</span>
+  }
+}
+</pre>
+
+		<h2>Genders</h2>
+		<p>RandomUser gives you a couple ways to control the results that the system outputs. You can request a specific gender using the "gender" GET parameter. Removing returns a random value.</p>
+<pre style="margin-bottom: 50px;">
+http://randomuser.me/g/<span>?gender=<span class='gen_gender'>female</span></span>
+</pre>
+
+		<h2>Seeds</h2>
+		<p>In order to speed up your application, RandomUser also allows you to always request the same information each time from the service. This is for both consistancy, and it allows your browser to cache profile photos to speed up your loading time. RandomUser accepts a "seed" parameter that will always return the same results.</p>
+<pre>
+http://randomuser.me/g/<span>?seed=foobar</span>
+</pre>
+
+		<p>(note that the seed will override the gender parameter)</p>
+	</div>
+
+	<footer>
+		<div class="frame">
+			<h1>Random User Generator</h1>
+			<div class="block">
+				<div class="builder block">
+					<h3>Designed</h3>
+					<a href="http://arronhunt.com"><img src="img/creator_arron.png" width="80px" alt="Designed by Arron Hunt" /></a>
+				</div>
+				<div class="builder block">
+					<h3>Developed</h3>
+					<a href="https://github.com/solewolf/"><img src="img/creator_keith.png" width="80px" alt="Developed by Keith" /></a>
+				</div>
+			</div>
+			<div class="block">
+			<h3>Copyright Notice</h3>
+			<p>Please note that RandomUser does not own or claim to own the rights to the various photos provided. In turn, neither do you. If you see a photo that belongs to you and would like it removed from our service, please contact <a href="http://twitter.com/arronhunt">@arronhunt</a></p>
+			</div>
+		</div>
+	</footer>
+
+
+	<script type="text/javascript">
+		var url = 'http://randomuser.me/g/',
+			seed = '001021015008091011'
+
+		var getUser = function(s){
+			// Get dat info
+			var output = $.ajax({
+				// Check if a seed parameter is passed.
+			    url: (s != undefined ? url+'?seed='+s : url),
+			    dataType: 'json',
+			    success: function(results){
+			    	$('#avatar').attr('src', results.user.picture);
+			    	$('.gen_profile_url').html('<a href="'+results.user.picture+'">'+results.user.picture+'</a>');
+			    	$('.gen_first_name').html(results.user.name.first);
+			    	$('.gen_last_name').html(results.user.name.last);
+			    	$('.gen_gender').html(results.user.gender);
+			    	$('.gen_email_address').html(results.user.email);
+			    	$('.gen_seed').html(results.user.seed);
+			    	$('#gen_url').html(url+'<span>?seed='+results.user.seed+'</span>');
+			    	console.log(results, s);
+			    }
+			});
+			// return output.success.results;
+		}
+		getUser();
+
+		$('#refresh').click(function(){
+			$(this).removeClass('spin').addClass('spin');
+			getUser();
+		});
+
+		$('#toggle').click(function(){
+			$('#hidden').toggle(250);
+		})
+		
+	</script>
+
+	<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-42942064-1', 'randomuser.me');
+  ga('send', 'pageview');
+
+</script>
+
+	</body>
+</html>
