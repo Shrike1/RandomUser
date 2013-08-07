@@ -17,8 +17,10 @@
 			</div>
 			<div class="info">
 				<h3>Hi, my name is <span class="gen_first_name">John</span> <span class="gen_last_name">Smith</span><img id="refresh" class="refresh" src="img/refresh.png" width="18px"></h3>
-				<p>I am a randomly generated user. Want to use me as a placeholder in your web application? <a id="toggle" href="javascript: void(0);">Info</a></p>
+				<p>I am a randomly generated user. Want to use me as a placeholder in your web application? Copy the the URL below. <!-- <a id="toggle" href="javascript: void(0);">Info</a></p> -->
 				<!-- <input  type="text" style="margin-top: 20px;" value="http://RandomUser/"></input> -->
+				<pre id="gen_url">http://randomuser.me/</pre>
+				<a id="toggle" href="javascript: void(0);">View my full profile</a></p>
 
 				<div id="hidden">
 					<p>
@@ -29,8 +31,6 @@
 					</p>
 					<p>Date of Birth, Home Address, and more coming soon...</p>
 				</div>
-
-				<pre id="gen_url">http://RandomUser/</pre>
 			</div>
 		</div>
 	</div>
@@ -105,9 +105,16 @@ http://randomuser.me/g/<span>?seed=foobar</span>
 
 
 	<script type="text/javascript">
-		var url = 'http://randomuser.me/g/',
-			seed = '001021015008091011'
+		var url = 'http://randomuser.me/g/'
+			keyA = ['red', 'orange', 'yellow', 'green', 'blue', 'purple', 'brown', 'black', 'white', 'golden', 'silver', 'big', 'small', 'heavy', 'tiny', 'lazy', 'beautiful', 'organic', 'ticklish', 'crazy'],
+			keyB = ['Cat', 'Dog', 'Panda', 'Bear', 'Fish', 'Bird', 'Elephant', 'Tiger', 'Snake', 'Rabbit', 'Peacock', 'Koala', 'Lion', 'Frog', 'Gorilla', 'Meercat', 'Ladybug', 'Butterfly', 'Goose', 'Duck', 'Swan', 'Ostrich', 'Leopard', 'Wolf', 'Mouse'];
 
+		function randomSeed(a, b){
+			prefix = Math.floor(Math.random() * a.length);
+			suffix = Math.floor(Math.random() * b.length);
+			string = a[prefix]+''+b[suffix];
+			return string;
+		}
 		var getUser = function(s){
 			// Get dat info
 			var output = $.ajax({
@@ -123,16 +130,16 @@ http://randomuser.me/g/<span>?seed=foobar</span>
 			    	$('.gen_email_address').html(results.user.email);
 			    	$('.gen_seed').html(results.user.seed);
 			    	$('#gen_url').html(url+'<span>?seed='+results.user.seed+'</span>');
-			    	console.log(results, s);
+			    	console.log(results.user.name.first+" "+results.user.name.last+': ', results);
 			    }
 			});
 			// return output.success.results;
 		}
-		getUser();
+		getUser(randomSeed(keyA, keyB));
 
 		$('#refresh').click(function(){
 			$(this).removeClass('spin').addClass('spin');
-			getUser();
+			getUser(randomSeed(keyA, keyB));
 		});
 
 		$('#toggle').click(function(){
@@ -142,15 +149,14 @@ http://randomuser.me/g/<span>?seed=foobar</span>
 	</script>
 
 	<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-42942064-1', 'randomuser.me');
-  ga('send', 'pageview');
-
-</script>
+		  ga('create', 'UA-42942064-1', 'randomuser.me');
+		  ga('send', 'pageview');
+	</script>
 
 	</body>
 </html>
