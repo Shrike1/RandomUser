@@ -24,11 +24,11 @@ The application will provide you with a JSON object that you can parse and apply
       user: {
         gender: female,
         name: {
-          first: Rebecca,
-          last: Anderson
+          first: Kay,
+          last: Stewart
         },
-        email: rebeccaanderson93@facebook.com,
-        picture: http://randomuser.me/g/portraits/women/014.jpg,
+        email: kaystewart60@email.me,
+        picture: http://randomuser.me/g/portraits/women/005.jpg,
         seed: bigSwan
       }
     }

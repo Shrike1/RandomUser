@@ -163,7 +163,7 @@ function genProfile($gender = null, $seed = null) {
 
                     // Email 2 random digits
                     else if ($a == 5) {
-                        $new_seed .= mt_rand(10,99);
+                        $new_seed .= convNum(mt_rand(10,99));
                     }
                     
                     // Picture
