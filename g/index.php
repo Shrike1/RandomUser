@@ -5,9 +5,9 @@ require_once "data.php";
 
 
 if (isset($_GET['seed'])) {
-	echo genProfile(null, stripslashes($_GET['seed']));
+        echo genProfile(null, stripslashes($_GET['seed']));
 } else {
-	echo genProfile($_GET['gender']);
+        echo genProfile($_GET['gender']);
 }
 
 ?>
