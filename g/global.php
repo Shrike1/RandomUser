@@ -8,7 +8,6 @@ function getFirstName($id) {
     $db = database();
     $statement = $db->prepare("SELECT * FROM first_name WHERE id = ?");
     $statement->execute(array($id));
-
     $info = $statement->FetchObject();
 
     return $info->name;
@@ -22,7 +21,6 @@ function getRandomFirstName($gender, $seed = null) {
     $db = database();
     $statement = $db->prepare("SELECT * FROM first_name WHERE gender = ? ORDER BY RAND($seed) LIMIT 1");
     $statement->execute(array($gender));
-
     $info = $statement->FetchObject();
 
     return $info->id;
@@ -32,7 +30,6 @@ function getLastName($id) {
     $db = database();
     $statement = $db->prepare("SELECT * FROM last_name WHERE id = ?");
     $statement->execute(array($id));
-
     $info = $statement->FetchObject();
 
     return $info->name;
@@ -42,7 +39,6 @@ function getRandomLastName($seed = null) {
     $db = database();
     $statement = $db->prepare("SELECT * FROM last_name ORDER BY RAND($seed) LIMIT 1");
     $statement->execute();
-
     $info = $statement->FetchObject();
 
     return $info->id;
@@ -52,8 +48,8 @@ function getDomain($id) {
     $db = database();
     $statement = $db->prepare("SELECT * FROM domain WHERE id = ?");
     $statement->execute(array($id));
-
     $info = $statement->FetchObject();
+
     return $info->domain;
 }
 
@@ -61,8 +57,8 @@ function getRandomDomain($seed = null) {
     $db = database();
     $statement = $db->prepare("SELECT * FROM domain ORDER BY RAND($seed) LIMIT 1");
     $statement->execute();
-
     $info = $statement->FetchObject();
+
     return $info->id;
 }
 
@@ -91,6 +87,19 @@ function numberOfEntries($table, $fieldname = null, $value = null) {
 
     $num_rows = $statement->rowCount();
     return $num_rows;
+}
+
+function validPerson($gender, $id) {
+    $db = database();
+    $statement = $db->prepare("SELECT * FROM first_name WHERE gender = ? AND id = ?");
+    $statement->execute(array($gender, $id));
+    $info = $statement->fetchObject();
+
+    if ($info != null) {
+        return 1;
+    } else {
+        return 0;
+    }
 }
 
 function error($reason) {

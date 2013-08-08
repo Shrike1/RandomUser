@@ -125,7 +125,7 @@ function genProfile($gender = null, $seed = null) {
                 "gender" => gender($gender),
                 "name" => array(
                     "first" => ucfirst($first[0]),
-                    "lasts" => ucfirst($last[0])
+                    "last" => ucfirst($last[0])
                 ),
                 "email" => $domain,
                 "picture" => $picture[0],
@@ -185,28 +185,18 @@ function genProfile($gender = null, $seed = null) {
                 }
 
                 // First Name
-                // Male
-                if ($seed_ex[0] == 1) {
-                    if ($seed_ex[1] > numberOfEntries("first_name", "gender", 1)) {
-                        $picture = getRandom("picture", 1);
-                        $seed_ex[1] = $picture[1];
-                    }
-                // Female
-                } else {
-                    if ($seed_ex[1] > numberOfEntries("first_name", "gender", 2)) {
-                        $picture = getRandom("picture", 2);
-                        $seed_ex[1] = $picture[1];
-                    }
+                if (!validPerson($seed_ex[0], $seed_ex[1])) {
+                    $seed_ex[1] = getRandomFirstName($seed_ex[0], $seed);
                 }
 
                 // Last Name
                 if ($seed_ex[2] > numberOfEntries("last_name")) {
-                    $seed_ex[2] = getRandomLastName();
+                    $seed_ex[2] = getRandomLastName($seed);
                 }
 
                 // Domain
                 if ($seed_ex[3] > numberOfEntries("domain")) {
-                    $seed_ex[3] = getRandomDomain();
+                    $seed_ex[3] = getRandomDomain($seed);
                 }
 
                 // Email (2 random digits)
