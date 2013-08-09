@@ -124,8 +124,8 @@ function genProfile($gender = null, $seed = null) {
             "user" => array(
                 "gender" => gender($gender),
                 "name" => array(
-                    "first" => ucfirst($first[0]),
-                    "last" => ucfirst($last[0])
+                    "first" => $first[0],
+                    "last" => $last[0]
                 ),
                 "email" => $domain,
                 "picture" => $picture[0],
@@ -241,8 +241,8 @@ function genProfile($gender = null, $seed = null) {
                 "user" => array(
                     "gender" => gender($seedinfo[0]),
                     "name" => array(
-                        "first" => ucfirst($first),
-                        "last" => ucfirst($last)
+                        "first" => $first,
+                        "last" => $last
                     ),
                     "email" => $domain,
                     "picture" => $picture,

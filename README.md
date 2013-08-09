@@ -24,8 +24,8 @@ The application will provide you with a JSON object that you can parse and apply
       user: {
         gender: female,
         name: {
-          first: Kay,
-          last: Stewart
+          first: kay,
+          last: stewart
         },
         email: kaystewart60@email.me,
         picture: http://randomuser.me/g/portraits/women/005.jpg,
