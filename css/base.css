@@ -543,6 +543,7 @@ p {
 .banner .preview .info h3 span {
   font-family: 'museo_slab500', sans-serif;
   border-bottom: 1px dotted #e45e39;
+  text-transform: capitalize;
 }
 .banner .preview .info .refresh {
   position: relative;
@@ -564,6 +565,10 @@ p {
 }
 .banner .preview .info #hidden span {
   font-weight: bold;
+}
+.banner .preview .info #hidden span.gen_first_name,
+.banner .preview .info #hidden span.gen_last_name {
+  text-transform: capitalize;
 }
 input[type="text"],
 pre {
