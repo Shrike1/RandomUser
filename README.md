@@ -46,4 +46,4 @@ In order to speed up your application, RandomUser also allows you to always requ
 
 # Copyright Notice
 
-Please note that RandomUser does not own or claim to own the rights to the various photos provided. In turn, neither do you. If you see a photo that belongs to you and would like it removed from our service, please contact @arronhunt
+Please note that RandomUser does not own or claim to own the rights to the various photos provided. In turn, neither do you. If you see a photo that belongs to you and would like it removed from our service, please contact [@arronhunt](https://github.com/arronhunt)
